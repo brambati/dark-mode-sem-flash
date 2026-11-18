@@ -1,0 +1,21 @@
+---
+// Astro → src/layouts/Layout.astro
+---
+<html lang="pt-BR">
+  <head>
+    <!-- is:inline: o Astro não empacota nem adia este script -->
+    <script is:inline>
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        if (t !== 'dark' && t !== 'light') {
+          t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
