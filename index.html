@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dark mode sem flash · demo</title>
+  <!-- ✅ síncrono, inline, ANTES do CSS: aplica o tema antes do 1º paint -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'dark' && t !== 'light') {
+        t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="transitions.css" />
+  <script src="theme.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <strong>Digital Lift</strong>
+    <button id="toggle" class="toggle" type="button" aria-label="Ativar tema escuro">☀️</button>
+  </header>
+  <main>
+    <article class="card">
+      <h1>Dark mode sem flash</h1>
+      <p>Recarregue a página no tema escuro: ela já abre escura, sem piscar branco.</p>
+      <p>Mude o tema do sistema operacional e veja o site acompanhar sem reload (se você ainda não clicou no botão).</p>
+      <button class="btn" type="button" id="reset">Voltar a seguir o sistema</button>
+    </article>
+  </main>
+</body>
+</html>
